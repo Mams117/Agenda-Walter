@@ -35,7 +35,6 @@ contacto.get("/contacto", async (req, res) => {
 
     try {
       let data = {
-        Id:req.body.Id,
         Nombre: req.body.Nombre,
         Apellido:req.body.Apellido,
         Apellido2:req.body.Apellido2,
