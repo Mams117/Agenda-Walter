@@ -3,9 +3,10 @@ const urlApi="http://localhost:4000/";
 
 
 //DOM Login
-const email=document.querySelector("#email")
-const password=document.querySelector("#password")
+const Email=document.querySelector("#email")
+const Password=document.querySelector("#password")
 const btnenviar=document.querySelector("#btnenviar")
+
 
 
 btnenviar.addEventListener("click",(e)=>{
@@ -16,8 +17,8 @@ fetch(urlApi+"login",{
     "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        Email: email.value,
-        Password: password.value,
+        Email: Email.value,
+        Password: Password.value,
         })
 })
 .then((res) => {
@@ -27,10 +28,11 @@ fetch(urlApi+"login",{
 .then((res) => {
     console.log(res)
     if(res==="true"){
-    window.location="http://127.0.0.1:5500/dashboard.html";
+    window.location="http://127.0.0.1:5501/front/citas.html";
 
     }
     else{
+        console.log()
         Swal.fire({
             icon: 'error',
             title: 'Falla en la validacion',
@@ -39,3 +41,6 @@ fetch(urlApi+"login",{
     }
   });
 })
+
+//Dom Registro
+
