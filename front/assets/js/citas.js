@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 //variables de entorno
 const urlApi = "http://localhost:4000/";
 
@@ -30,4 +32,28 @@ btnenviar.addEventListener("click", (e) => {
         console.log(res);
       }
     });
+});
+const table = document.querySelector("#table");
+const th1 = document.querySelector("#th1");
+const th2 = document.querySelector("#th2");
+const th3 = document.querySelector("#th3");
+
+fetch(urlApi + "cita").then((respuesta) => {
+  return respuesta.json();
+});
+then((respuesta) => {
+  for (let index = 0; index < respuesta.length; index++) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    const td1 = document.createElement("td");
+    const td2 = document.createElement("td");
+    const td3 = document.createElement("td");
+
+    td.innerHTML = respuesta.Id;
+
+    tr.appendChild(td);
+    tr1.appendChild(td);
+    tr2.appendChild(td);
+    tr3.appendChild(td);
+  }
 });
