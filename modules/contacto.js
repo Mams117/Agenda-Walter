@@ -67,7 +67,7 @@ contacto.get("/contacto", async (req, res) => {
         Email: req.body.Email,
         Fecha_nace: req.body.Fecha_nace,
     };
-    conex.query("UPDATE contacto SET  ? where id = ?", [datos, Id]),
+    conex.query("UPDATE contacto SET  ? where Id = ?", [datos, Id]),
       (error, respuesta) => {
         if (error) {
           console.log(error);
