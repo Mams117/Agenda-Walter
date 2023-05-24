@@ -76,7 +76,7 @@ btnregistro.addEventListener("click",(e)=>{
                 title: 'Good...',
                 text: 'Registrado Correctamente!',
               })
-            console.log("Usuario Registrado")
+           
         }
     
     })

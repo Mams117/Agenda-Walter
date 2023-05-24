@@ -44,7 +44,7 @@ usuario.get("/usuario", async (req, res) => {
       conex.query("insert into usuarios set?", [data], (error, respuesta) => {
         console.log(respuesta);
         //res.send("insecion exitosa");
-        res.send(true);
+        // res.send(true);
       });
     } catch (error) {
       console.log(error);
