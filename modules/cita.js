@@ -34,6 +34,12 @@ cita.get("/cita", async (req, res) => {
   //2.Insertar una Cita
 
   cita.post("/cita", async (req, res) => {
+
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
+  let fecha = hoy.toISOString();
+  let fechaFinal = fecha.split("T");
+  
     try {
       let data = {
         Fecha: req.body.Fecha,
@@ -43,6 +49,7 @@ cita.get("/cita", async (req, res) => {
       conex.query("insert into cita set?", [data], (error, respuesta) => {
         console.log(respuesta);
         //res.send("insecion exitosa");
+        console.log(fechaFinal[0]);
         res.send(true);
       });
     } catch (error) {
@@ -72,7 +79,7 @@ cita.get("/cita", async (req, res) => {
 
  //borrar
 
-usuario.delete("/cita", (req, res) => {
+cita.delete("/cita", (req, res) => {
     let Id = req.params.Id;
     conex.query("DELETE FROM cita where id = ?", Id),
       (error, respuesta) => {
