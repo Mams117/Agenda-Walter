@@ -90,25 +90,25 @@ usuario.get("/usuario", async (req, res) => {
 
 
   usuario.post("/login", async (req, res) => {
+    const Email = req.body.Email;
+    const Password = req.body.Password;
     try {
-      const Email = req.body.Email;
-      const Password = req.body.Password;
-  
       //validamos que llegue el email y la contraseña
       if (!Email || !Password) {
         console.log("Complete todos los campos!");
       } else {
         conex.query(
-          "select * from usuario where email =?",
+          "select * from usuarios where Email =?",
           [Email],
           async (error, respuesta) => {
-            if (respuesta.length == 0 ||!(await bcrypt.compare(contraseña, respuesta[0].contraseña))
+            if (respuesta.length == 0 ||!(await bcrypt.compare(Password, respuesta[0].Password))
             ) { 
   
               // res.sendStatus(404)
               // res.send({estado:true,nombre:"juanito"})
-              // console.log("el usuario o clave ingresada no existe");
+            
               res.send(false)
+           
             } else {
               //Enviamos las variables al front end para que cargue la paguina
               // console.log("bienvenido al sistema de informacion");
