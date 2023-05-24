@@ -43,7 +43,6 @@ cita.get("/cita", async (req, res) => {
       conex.query("insert into cita set?", [data], (error, respuesta) => {
         console.log(respuesta);
         //res.send("insecion exitosa");
-       
         res.send(true);
       });
     } catch (error) {

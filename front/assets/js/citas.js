@@ -27,9 +27,17 @@ btnenviar.addEventListener("click", (e) => {
     .then((res) => {
       console.log(res);
       if (res === "true") {
-        window.location = "http://127.0.0.1:5501/front/citas.html";
+        Swal.fire({
+          icon: 'success',
+          title: 'Good',
+          text: 'Cita ingresada Correctamente',
+        })       
       } else {
-        console.log(res);
+        Swal.fire({
+          icon: 'error',
+          title: 'ERROR',
+          text: 'Problema al registrar la citaa',
+        })
       }
     });
 });
