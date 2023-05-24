@@ -43,4 +43,47 @@ fetch(urlApi+"login",{
 })
 
 //Dom Registro
+const Nombre=document.querySelector("#Nombre")
+const Apellido=document.querySelector("#Apellido")
+const EmailRegistro=document.querySelector("#Email")
+const PasswordRegistro=document.querySelector("#password")
+const btnregistro=document.querySelector("#btnregistro")
+
+
+
+btnregistro.addEventListener("click",(e)=>{
+    e.preventDefault();
+    fetch(urlApi+"usuario",{
+        method:"POST",
+        headers:{
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Nombre: Nombre.value,
+            Apellido: Apellido.value,
+            Email:EmailRegistro.value,
+            Password:PasswordRegistro.value,
+            })
+    })
+    .then((res)=>{
+        return res.text()
+    })
+    .then((res)=>{
+        console.log(res)
+        if (res==="true") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Good...',
+                text: 'Registrado Correctamente!',
+              })
+           
+        }
+    
+    })
+    })
+
+
+
+
+
 
