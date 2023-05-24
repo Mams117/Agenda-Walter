@@ -9,7 +9,7 @@
     <title>Citas</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css"rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./assets/css/citas.css" rel="stylesheet" />
 </head>
@@ -44,20 +44,21 @@
         <div class="row">
             <!-- Blog entries-->
             <div class="col-lg-8" id="table">
+
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" id="th1">Id</th>
-                            <th scope="col" id="th2">Fecha</th>
-                            <th scope="col" id="th3">Descripcion</th>
-
+                            <th scope="col">Id</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Actualizar</th>
+                            <th scope="col">Borrar</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla">
 
                     </tbody>
                 </table>
-
             </div>
             <!-- Side widgets-->
             <div class="col-lg-4">
@@ -95,18 +96,18 @@
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                            <input type="email" class="form-control" id="FechaCita">
+                            <input type="date" class="form-control" id="FechaCitaa">
 
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Descripcion</label>
-                            <input type="text" class="form-control" id="DescripcionCita">
+                            <input type="text" class="form-control" id="DescripcionCitaa">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnregistro">Registrarse</button>
+                    <button type="button" class="btn btn-primary" id="btnActualizar">Actualizar</button>
                 </div>
             </div>
         </div>

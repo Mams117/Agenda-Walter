@@ -15,76 +15,70 @@ cita.use(express.json()); //serializa la data en JSON
 cita.use(cors());
 cita.options("*", cors());
 
-
-//1.Traer las citas 
+//1.Traer las citas
 cita.get("/cita", async (req, res) => {
-    try {
-      conex.query(
-        "select Fecha,Descripcion from cita",
-        (error, respuesta) => {
-          console.log(respuesta);
-          res.send(respuesta);
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  try {
+    conex.query("select * from cita", (error, respuesta) => {
+      console.log(respuesta);
+      res.send(respuesta);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-  //2.Insertar una Cita
+//2.Insertar una Cita
 
-  cita.post("/cita", async (req, res) => {
-    try {
-      let data = {
-        Fecha: req.body.Fecha,
-        Descripcion: req.body.Descripcion,
-      };
-  
-      conex.query("insert into cita set?", [data], (error, respuesta) => {
-        console.log(respuesta);
-        //res.send("insecion exitosa");
-        res.send(true);
-      });
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
-  });
-//3.Editar Citas
-  cita.put("/cita", (req, res) => {
-    let Id = req.params.Id;
-    let datos = {
-        Fecha: req.body.Fecha,
-        Descripcion: req.body.Descripcion,
+cita.post("/cita", async (req, res) => {
+  try {
+    let data = {
+      Fecha: req.body.Fecha,
+      Descripcion: req.body.Descripcion,
     };
-    conex.query("UPDATE cita SET  ? where id = ?", [datos, Id]),
-      (error, respuesta) => {
-        if (error) {
-          console.log(error);
-        } else {
-          res.status(201);
-          //  res.status(201).send(respuesta)
-        }
-      };
-  });
 
- //4. borrar cita
+    conex.query("insert into cita set?", [data], (error, respuesta) => {
+      console.log(respuesta);
+      //res.send("insecion exitosa");
+      res.send(true);
+    });
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+//3.Editar Citas
+cita.put("/cita", (req, res) => {
+  let Id = req.params.Id;
+  let datos = {
+    Fecha: req.body.Fecha,
+    Descripcion: req.body.Descripcion,
+  };
+  conex.query("UPDATE cita SET  ? where Id = ?", [datos, Id]),
+    (error, respuesta) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.status(201);
+        //  res.status(201).send(respuesta)
+      }
+    };
+});
 
- //borrar
+//4. borrar cita
+
+//borrar
 
 cita.delete("/cita", (req, res) => {
-    let Id = req.params.Id;
-    conex.query("DELETE FROM cita where id = ?", Id),
-      (error, respuesta) => {
-        if (error) {
-          console.log(error);
-        } else {
-          //res.status(201)
-          res.status(201).send(respuesta);
-        }
-      };
-  });
+  let Id = req.params.Id;
+  conex.query("DELETE FROM cita where id = ?", Id),
+    (error, respuesta) => {
+      if (error) {
+        console.log(error);
+      } else {
+        //res.status(201)
+        res.status(201).send(respuesta);
+      }
+    };
+});
 
-
-
-  module.exports = cita;
+module.exports = cita;
