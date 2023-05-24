@@ -30,3 +30,97 @@ usuario.get("/usuario", async (req, res) => {
       console.log(error);
     }
   });
+
+  //2.insertamos los usuarios
+  usuario.post("/usuario", async (req, res) => {
+    try {
+      let data = {
+        Nombre: req.body.Nombre,
+        Apellido:req.body.Apellido,
+        Email: req.body.Email,
+        Password: bcrypt.hashSync(req.body.Password, 7),
+      };
+  
+      conex.query("insert into usuarios set?", [data], (error, respuesta) => {
+        console.log(respuesta);
+        //res.send("insecion exitosa");
+        res.send(true);
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  });
+
+
+  //3.Editar o actualizar Usuarios
+  usuario.put("/usuario", (req, res) => {
+    let Id = req.params.Id;
+    let datos = {
+        Nombre: req.body.Nombre,
+        Apellido:req.body.Apellido,
+        Email: req.body.Email,
+        Password: bcrypt.hashSync(req.body.Password, 7),
+    };
+    conex.query("UPDATE usuario SET  ? where id = ?", [datos,Id]),
+      (error, respuesta) => {
+        if (error) {
+          console.log(error);
+        } else {
+          res.status(201);
+          //  res.status(201).send(respuesta)
+        }
+      };
+  });
+
+  //4. Borrar
+  usuario.delete("/usuario", (req, res) => {
+    let Id = req.params.Id;
+    conex.query("DELETE FROM usuario where id = ?", Id),
+      (error, respuesta) => {
+        if (error) {
+          console.log(error);
+        } else {
+          //res.status(201)
+          res.status(201).send(respuesta);
+        }
+      };
+  });
+
+
+
+  usuario.post("/login", async (req, res) => {
+    try {
+      const Email = req.body.Email;
+      const Password = req.body.Password;
+  
+      //validamos que llegue el email y la contraseña
+      if (!Email || !Password) {
+        console.log("Complete todos los campos!");
+      } else {
+        conex.query(
+          "select * from usuario where email =?",
+          [Email],
+          async (error, respuesta) => {
+            if (respuesta.length == 0 ||!(await bcrypt.compare(contraseña, respuesta[0].contraseña))
+            ) { 
+  
+              // res.sendStatus(404)
+              // res.send({estado:true,nombre:"juanito"})
+              // console.log("el usuario o clave ingresada no existe");
+              res.send(false)
+            } else {
+              //Enviamos las variables al front end para que cargue la paguina
+              // console.log("bienvenido al sistema de informacion");
+              res.send(true)
+            }
+          }
+        );
+      }
+    } catch (error) {
+      res.send(true);
+      // console.log("error en la red");
+    }
+  });
+  
+  module.exports = usuario;
