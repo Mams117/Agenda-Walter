@@ -1,5 +1,5 @@
 //variables de entorno
-const urlApi = "http://localhost:4000/";
+const urlApi="http://localhost:5501/";
 
 const on = (Element, event, selector, handler) => {
   Element.addEventListener(event, (e) => {
@@ -16,7 +16,7 @@ const btnenviar = document.querySelector("#btnenviar");
 
 btnenviar.addEventListener("click", (e) => {
   e.preventDefault(); //previene el reenvio del formulario
-  fetch(urlApi + "cita", {
+  fetch(urlApi+"cita", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
