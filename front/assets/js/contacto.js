@@ -1,13 +1,7 @@
 //variables de entorno
 const urlApi="http://localhost:5501/";
 
-const on =(Element,event,selector,handler)=>{
-  Element.addEventListener(event,(e)=>{
-    if (e.target.closest(selector)) {
-      handler(e)
-    }
-  })
-}
+
 
 //Dom registro Contacto
 
@@ -19,42 +13,70 @@ const EmailContacto=document.querySelector("#EmailContacto")
 const FechaContacto=document.querySelector("#FechaContacto")
 const btnRegistroContacto=document.querySelector("#btnRegistroContacto")
 
-//Dom actualizar
-const NombreContactoActualizar=document.querySelector("#NombreContactoActualizar")
-const ApellidoContactoActualizar=document.querySelector("#ApellidoContactoActualizar")
-const ApellidoContacto2Actualizar=document.querySelector("#Apellido2ContactoActualizar")
-const TelefonoContactoActualizar=document.querySelector("#TelefonoContactoActualizar")
-const EmailContactoActualizar=document.querySelector("#EmailContactoActualizar")
-const FechaContactoActualizar=document.querySelector("#FechaContactoActualizar")
-const btnRegistroContactoActualizar=document.querySelector("#ActualizarContacto")
+
 
 
 //Evento actualizar
-btnRegistroContactoActualizar.addEventListener("click",(e)=>{
-  e.preventDefault()
-  fetch(urlApi+"contacto",{
-    method:"PUT",
-    headers:{
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      Nombre:NombreContactoActualizar.value,
-      Apellido:ApellidoContactoActualizar.value,
-      Apellido2:ApellidoContacto2Actualizar.value,
-      Telefono: TelefonoContactoActualizar.value,
-      Email: EmailContactoActualizar.value,
-      Fecha_nace:FechaContactoActualizar.value,
-      })
+const on =(Element,event,selector,handler)=>{
+  Element.addEventListener(event,(e)=>{
+    if (e.target.closest(selector)) {
+      handler(e)
+    }
   })
-  .then((res)=>{
-    return res.json()
+}
+on(document,"click","#btnActualizarContacto",(e)=>{
+  const NombreContactoActualizar=document.querySelector("#NombreContactoActualizar")
+  const ApellidoContactoActualizar=document.querySelector("#ApellidoContactoActualizar")
+  const ApellidoContacto2Actualizar=document.querySelector("#Apellido2ContactoActualizar")
+  const TelefonoContactoActualizar=document.querySelector("#TelefonoContactoActualizar")
+  const EmailContactoActualizar=document.querySelector("#EmailContactoActualizar")
+  const FechaContactoActualizar=document.querySelector("#FechaContactoActualizar")
+  const btnRegistroContactoActualizar=document.querySelector("#btnActualizarContacto")
+  let fila=e.target.parentNode.parentNode;
+  let Id=fila.firstElementChild.innerHTML;
+  btnRegistroContactoActualizar.addEventListener("click",(e)=>{
+    //Dom actualizar
+    e.preventDefault()
+    fetch(urlApi+"contacto1"+Id,{
+      method:"PUT",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Nombre:NombreContactoActualizar.value,
+        Apellido:ApellidoContactoActualizar.value,
+        Apellido2:ApellidoContacto2Actualizar.value,
+        Telefono: TelefonoContactoActualizar.value,
+        Email: EmailContactoActualizar.value,
+        Fecha_nace:FechaContactoActualizar.value,
+        })
+    })
+    .then((res)=>{
+      return res.json()
+    })
+    .then((res=>{
+      console.log(res)
+      if (res==="true") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Good...',
+          text: 'Registrado Correctamente!',
+        })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'mal',
+          text: 'Registrado Incorrecto!',
+        })
+      }
+     
+  
+    })
+      
+    )
   })
-  .then((res=>{
-
-  })
-    
-  )
 })
+
 
 
 
@@ -96,7 +118,7 @@ btnRegistroContacto.addEventListener("click",(e)=>{
         return res.text();
       })
     .then((res) => {
-        console.log(res)
+        
           if(res==="true"){
             Swal.fire({
                 icon: 'success',

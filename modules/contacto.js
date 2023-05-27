@@ -72,7 +72,7 @@ contacto.get("/contacto", async (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          res.status(201);
+          res.status(true);
           //  res.status(201).send(respuesta)
         }
       };
