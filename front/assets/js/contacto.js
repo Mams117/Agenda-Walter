@@ -1,5 +1,5 @@
 //variables de entorno
-const urlApi="http://localhost:4000/";
+const urlApi="http://localhost:5501/";
 
 const on =(Element,event,selector,handler)=>{
   Element.addEventListener(event,(e)=>{
@@ -78,41 +78,25 @@ btnRegistroContacto.addEventListener("click",(e)=>{
             })
     })
     .then((res) => {
-      if (NombreContacto || ApellidoContacto || ApellidoContacto2 || TelefonoContacto|| EmailContactoActualizar || FechaContacto=="") {
-        Swal.fire({
-          icon: 'error',
-          title: 'ERROR',
-          text: 'Datos vacios',
-        })
-      }else{
+     
         if(res==="true"){
           Swal.fire({
               icon: 'success',
               title: 'Good',
               text: 'Contacto Actualizado Correctamente',
             })
-  
       }
       else{
-          
-          Swal.fire({
-              icon: 'error',
-              title: 'ERROR',
-              text: 'Problema al Actualizar el contacto',
-            })
-      }
+        Swal.fire({
+            icon: 'error',
+            title: 'ERROR',
+            text: 'Problema al Actualizar el contacto',
+          })
     }
         return res.text();
       })
     .then((res) => {
         console.log(res)
-        if (NombreContacto || ApellidoContacto || ApellidoContacto2 || TelefonoContacto || EmailContacto || FechaContacto=="") {
-          Swal.fire({
-            icon: 'error',
-            title: 'ERROR',
-            text: 'Datos vacios',
-          })
-        }else{
           if(res==="true"){
             Swal.fire({
                 icon: 'success',
@@ -122,25 +106,12 @@ btnRegistroContacto.addEventListener("click",(e)=>{
     
         }
         else{
-            
             Swal.fire({
                 icon: 'error',
                 title: 'ERROR',
                 text: 'Problema al registrar el contacto',
               })
         }
-        }
-       
-
-
-
-
-
-
-
-
-
-
 fetch(urlApi+"contacto")
 .then((res)=>{
   return res.json()

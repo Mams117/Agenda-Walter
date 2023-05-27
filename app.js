@@ -5,6 +5,6 @@ const app = express(); //creamos nuestra aplicacion llamando el metodo construct
 app.use("/", require("./modules/usuario")); //redirigimos al modulo PRODUCTO
 app.use("/", require("./modules/contacto")); //redirigimos al modulo PRODUCTO
 app.use("/", require("./modules/cita")); //redirigimos al modulo PRODUCTO
-app.listen("4000", () => {
-  console.log("Aplicacion ejecutandose en : http://localhost:4000");
+app.listen("5501", () => {
+  console.log("Aplicacion ejecutandose en : http://localhost:5501");
 });
